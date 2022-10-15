@@ -2,14 +2,14 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/media_card_view"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:cardBackgroundColor="@android:color/white"
     app:cardElevation="4dp"
     app:cardUseCompatPadding="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="10dp">
         <!--
@@ -21,21 +21,45 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:layout_width="200dp"
-            android:layout_height="160dp"
+            android:layout_width="300dp"
+            android:layout_height="200dp"
             android:scaleType="centerCrop"
             android:src="@mipmap/ic_launcher" />
-
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Category"
+            android:padding="2dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#003CF3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="date"
+            android:padding="2dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#003CF3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
         <TextView
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/image"
+            app:layout_constraintTop_toBottomOf="@id/category"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:text="Movie"
             android:padding="2dp"
+            android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:textSize="16sp"
             android:textStyle="bold" />

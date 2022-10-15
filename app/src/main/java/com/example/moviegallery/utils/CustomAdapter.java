@@ -1,9 +1,6 @@
 package com.example.moviegallery.utils;
 
-import static com.example.moviegallery.utils.Constants.POSTER_BASE_URL;
-
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,21 +13,22 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.example.moviegallery.FirstFragment;
 import com.example.moviegallery.FirstFragmentDirections;
 import com.example.moviegallery.R;
-import com.example.moviegallery.models.MovieListModel;
+import com.example.moviegallery.models.NewsListModel;
 
+import java.text.DateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 
 public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHolder> {
 
-    ArrayList<MovieListModel.Result> movieList;
+    ArrayList<NewsListModel.Article> movieList;
     Context context;
     Fragment fragment;
 
-    public CustomAdapter(Context context, ArrayList<MovieListModel.Result> movieList,Fragment fragment) {
+    public CustomAdapter(Context context, ArrayList<NewsListModel.Article> movieList, Fragment fragment) {
         this.context = context;
         this.movieList = movieList;
         this.fragment = fragment;
@@ -51,16 +49,20 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
         // set the data in items
         int pos = holder.getAdapterPosition();
         holder.name.setText(movieList.get(pos).title);
+        holder.category.setText(movieList.get(pos).author);
+        DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.DEFAULT, Locale.getDefault());
+        String date = dateFormat.format(movieList.get(pos).publishedAt);
+        holder.date.setText(date);
         // holder.image.setImageResource(movieList.get(pos).title);
         // implement setOnClickListener event on item view.
-        loadImage(holder.image, movieList.get(pos).poster_path);
+        loadImage(holder.image, movieList.get(pos).urlToImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 // open another activity on item click
 
                 NavHostFragment.findNavController(fragment)
-                        .navigate(FirstFragmentDirections.actionFirstFragmentToSecondFragment(movieList.get(pos).id));
+                        .navigate(FirstFragmentDirections.actionFirstFragmentToSecondFragment(movieList.get(pos).title,movieList.get(pos).content,date,movieList.get(pos).author,movieList.get(pos).urlToImage));
 
             }
         });
@@ -69,7 +71,7 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
     private void loadImage(ImageView imageView, String url) {
         Glide.with(imageView.getContext())
-                .load(POSTER_BASE_URL + url) // image url
+                .load(url) // image url
                 .placeholder(R.drawable.no_picture) // any placeholder to load at start
                 .error(R.drawable.no_picture)  // any image in case of error
                 .centerCrop()
@@ -85,6 +87,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
     public static class MyViewHolder extends RecyclerView.ViewHolder {
         // init the item view's
         TextView name;
+        TextView category;
+        TextView date;
         ImageView image;
 
         public MyViewHolder(View itemView) {
@@ -92,6 +96,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.MyViewHold
 
             // get the reference of item view's
             name = (TextView) itemView.findViewById(R.id.name);
+            category = (TextView) itemView.findViewById(R.id.category);
+            date = (TextView) itemView.findViewById(R.id.date);
             image = (ImageView) itemView.findViewById(R.id.image);
 
         }

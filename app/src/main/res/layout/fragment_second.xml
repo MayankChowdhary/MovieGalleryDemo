@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+    android:padding="10dp"
     android:background="@color/white"
     tools:context=".SecondFragment">
 
@@ -22,6 +22,46 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/movie_details_poster"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:text="Title"
+            android:padding="2dp"
+            app:layout_constraintHorizontal_bias="0.1"
+            android:layout_marginTop="10dp"
+            android:textColor="#003CF3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+           app:layout_constraintStart_toStartOf="parent"
+            android:text="Categoty"
+            android:padding="2dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#003CF3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Date"
+            android:padding="2dp"
+            android:layout_marginTop="10dp"
+            android:textColor="#003CF3"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+        <TextView
             android:id="@+id/textview_movie_details"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,6 +70,6 @@
             android:textSize="18sp"
             android:fontFamily="monospace"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/movie_details_poster" />
+            app:layout_constraintTop_toBottomOf="@id/category" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
